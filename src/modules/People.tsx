@@ -1,5 +1,11 @@
 import React from "react";
-import { Grid, Container } from "@material-ui/core";
+import {
+  Grid,
+  Container,
+  makeStyles,
+  Typography,
+  Box,
+} from "@material-ui/core";
 import { gql, useQuery } from "@apollo/client";
 
 import Pagination from "../components/Pagination";
@@ -8,10 +14,8 @@ import { Progress } from "../components/Progress";
 import { PersonCard, PersonProps } from "./Person";
 import { Error } from "../components/Error";
 // import { OpeningCrawl } from "../components/OpeningCrawl";
-import { SearchContext } from "../contexts/SearchContext";
 import { DataContext, DataContextProps } from "../contexts/DataContext";
 import { Banner } from "../components/Banner";
-import { PersonDetailsProps } from "./PersonDetails";
 
 const PEOPLE_QUERY = gql`
   query AllPeople($offset: Int, $limit: Int, $name: String) {
@@ -27,8 +31,14 @@ const PEOPLE_QUERY = gql`
   }
 `;
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    justifyContent: "center",
+  },
+}));
 export const People = () => {
   const { offset, limit } = React.useContext(PaginationContext);
+  const classes = useStyles();
   const { setData, data: ctxData } = React.useContext<
     DataContextProps<PersonProps>
   >(DataContext);
@@ -41,9 +51,7 @@ export const People = () => {
   });
 
   React.useEffect(() => {
-    console.log("hay: ", data);
     if (data && data.allPeople) {
-      const { gender, height, name, homeworld } = data.allPeople;
       setData(data.allPeople as PersonProps);
     }
   }, [data, setData]);
@@ -51,17 +59,27 @@ export const People = () => {
   if (error) {
     return <Error message={error.message} />;
   }
-  // if (loading) {
-  //   return <Progress />;
-  // }
   return (
     <>
       {ctxData ? (
         <>
           {loading && <Progress />}
           <Banner person={ctxData[0]} isHomePage />
+          {!loading && <Pagination count={100} rowsPerPage={10} />}
+          {data && (
+            <Box ml={4} mb={3}>
+              <Typography variant='h2' color='primary'>
+                All Characters
+              </Typography>
+            </Box>
+          )}
           <Container maxWidth='xl'>
-            <Grid style={{ padding: 0 }} container spacing={4}>
+            <Grid
+              style={{ padding: 10 }}
+              container
+              spacing={4}
+              className={classes.container}
+            >
               {
                 // @ts-ignore
                 ctxData &&

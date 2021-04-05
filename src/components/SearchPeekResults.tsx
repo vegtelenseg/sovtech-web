@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import { PersonProps } from "../modules/Person";
 import { useHistory } from "react-router";
+import { SearchResultsContext } from "../contexts/SearchResults";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,14 +38,16 @@ interface Props {
 export const SearchPeekResults = (props: Props) => {
   const classes = useStyles();
   const history = useHistory();
+  const { setIsOpen, isOpen } = React.useContext(SearchResultsContext);
   const handleOnClick = React.useCallback(
     (name: string) => {
       history.push(`/person/${name}`);
+      setIsOpen(false);
     },
     [history]
   );
   const { people } = props;
-  return (
+  return isOpen ? (
     <div className={classes.root}>
       <List>
         {people.map((person) => (
@@ -60,5 +63,5 @@ export const SearchPeekResults = (props: Props) => {
         ))}
       </List>
     </div>
-  );
+  ) : null;
 };

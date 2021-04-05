@@ -2,9 +2,6 @@ import React from "react";
 
 interface Props<T> {}
 
-interface Data<T> {
-  [key: string]: T[];
-}
 export interface DataContextProps<T> {
   data: T[];
   setData: (data: T) => void;
@@ -23,7 +20,6 @@ export const DataController = <T extends object>(
 ) => {
   const { children } = props;
   const [data, setData] = React.useState([]);
-  console.log("CTX DATA: ", data);
 
   const value = React.useMemo(
     () => ({

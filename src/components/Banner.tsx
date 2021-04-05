@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 600,
     backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
     display: "flex",
     alignItems: "center",
     paddingLeft: "2rem",

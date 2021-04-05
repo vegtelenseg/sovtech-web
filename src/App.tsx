@@ -14,8 +14,8 @@ import { DataController } from "./contexts/DataContext";
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <PaginationController>
-        <DataController>
+      <DataController>
+        <PaginationController>
           <SearchController>
             <Router>
               <Navbar />
@@ -29,8 +29,8 @@ function App() {
               </Switch>
             </Router>
           </SearchController>
-        </DataController>
-      </PaginationController>
+        </PaginationController>
+      </DataController>
     </MuiThemeProvider>
   );
 }
