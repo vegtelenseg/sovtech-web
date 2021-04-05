@@ -99,13 +99,17 @@ export const PersonDetails = () => {
   if (loading) {
     return <Progress />;
   }
-  return data
-    ? data.person.map((person) => (
-        <>
-          <Banner person={person} />
-          <Films films={person.films} />
-          <Vehicles vehicles={person.vehicles} />
-        </>
-      ))
-    : null;
+  return (
+    <>
+      {data
+        ? data.person.map((person) => (
+            <>
+              <Banner person={person} />
+              <Films films={person.films} />
+              <Vehicles vehicles={person.vehicles} />
+            </>
+          ))
+        : null}
+    </>
+  );
 };
