@@ -5,26 +5,25 @@ interface Props<T> {}
 interface Data<T> {
   [key: string]: T[];
 }
-
 export interface DataContextProps<T> {
-  data: Data<T>;
+  data: T[];
   setData: (data: T) => void;
 }
 
 const DataState: DataContextProps<any> = {
   setData: (data: any) => {},
-  data: {},
+  data: [],
 };
 
 export const DataContext = React.createContext<DataContextProps<any>>(
   DataState
 );
-
 export const DataController = <T extends object>(
-  props: React.PropsWithChildren<Data<T>>
+  props: React.PropsWithChildren<Props<T>>
 ) => {
   const { children } = props;
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState([]);
+  console.log("CTX DATA: ", data);
 
   const value = React.useMemo(
     () => ({
@@ -33,7 +32,5 @@ export const DataController = <T extends object>(
     }),
     [data, setData]
   );
-  console.log("CTX DATA: ", value);
-
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

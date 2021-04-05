@@ -1,6 +1,6 @@
 import React from "react";
 import { Slideshow, useSlideShowStyles } from "../components/Slideshow";
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 export interface Film {
   title: string;

@@ -87,6 +87,7 @@ export const PersonDetails = () => {
   const { data, loading, error } = useQuery<PersonDetailsQuery>(
     PERSON_DEATILS_QUERY,
     {
+      fetchPolicy: "cache-first",
       variables: {
         name,
       },
@@ -104,7 +105,10 @@ export const PersonDetails = () => {
       {data
         ? data.person.map((person) => (
             <>
-              <Banner person={person} />
+              <Banner
+                // @ts-ignore
+                person={person}
+              />
               <Films films={person.films} />
               <Vehicles vehicles={person.vehicles} />
             </>

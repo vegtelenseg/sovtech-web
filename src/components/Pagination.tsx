@@ -45,6 +45,7 @@ export default function Pagination(props: PaginationProps) {
       page={page}
       onChangePage={handleChangePage}
       rowsPerPage={rowsPerPage}
+      // sho
       onChangeRowsPerPage={handleChangeRowsPerPage}
     />
   );

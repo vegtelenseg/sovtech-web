@@ -1,14 +1,12 @@
 import React from "react";
 
-import { SearchContext } from "../contexts/SearchContext";
-import { useQuery, gql, useLazyQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import { DataContext, DataContextProps } from "../contexts/DataContext";
 import { PersonProps } from "./Person";
 import { Progress } from "../components/Progress";
 import { Error } from "../components/Error";
 import { SearchBar } from "../components/SearchBar";
 import { SearchPeekResults } from "../components/SearchPeekResults";
-import { withRouter } from "react-router";
 
 const PERSON_QUERY = gql`
   query People($name: String) {
@@ -31,7 +29,9 @@ const SearchModule = React.memo(() => {
   });
 
   React.useEffect(() => {
-    setData(data);
+    if (data && data.person) {
+      setData(data.person);
+    }
   }, [data, setData]);
 
   const handleKeyUp = React.useCallback(

@@ -1,15 +1,14 @@
 import React from "react";
 import { OpeningCrawl } from "./OpeningCrawl";
 import { makeStyles } from "@material-ui/core/styles";
-import { PersonDetailsProps } from "../modules/PersonDetails";
 import { Typography } from "@material-ui/core";
+import { PersonProps } from "../modules/Person";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: 600,
     backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
     display: "flex",
     alignItems: "center",
     paddingLeft: "2rem",
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface Props {
-  person: PersonDetailsProps;
+  person: PersonProps;
   isHomePage?: boolean;
 }
 
@@ -38,7 +37,7 @@ export const Banner = (props: Props) => {
         <div>
           <Typography variant='h3'>{`Name: ${person.name}`}</Typography>
           <Typography variant='h4'>{`Height: ${person.height} cm`}</Typography>
-          <Typography variant='h4'>{`Mass: ${person.mass} kg`}</Typography>
+          <Typography variant='h4'>{`Mass: ${person.homeworld.name} kg`}</Typography>
           <Typography variant='h5'>{`Gender: ${person.gender}`}</Typography>
         </div>
       )}

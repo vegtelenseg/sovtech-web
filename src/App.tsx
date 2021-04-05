@@ -9,25 +9,28 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/DefaultTheme";
 import Navbar from "./modules/Navbar";
 import { SearchController } from "./contexts/SearchContext";
+import { DataController } from "./contexts/DataContext";
 
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <SearchController>
-        <PaginationController>
-          <Router>
-            <Navbar />
-            <Switch>
-              <Route exact path='/'>
-                <People />
-              </Route>
-              <Route exact path='/person/:name'>
-                <PersonDetails />
-              </Route>
-            </Switch>
-          </Router>
-        </PaginationController>
-      </SearchController>
+      <PaginationController>
+        <DataController>
+          <SearchController>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route exact path='/'>
+                  <People />
+                </Route>
+                <Route exact path='/person/:name'>
+                  <PersonDetails />
+                </Route>
+              </Switch>
+            </Router>
+          </SearchController>
+        </DataController>
+      </PaginationController>
     </MuiThemeProvider>
   );
 }
