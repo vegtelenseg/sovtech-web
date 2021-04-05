@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import InboxIcon from "@material-ui/icons/Inbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import { PersonProps } from "../modules/Person";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function ListItemLink(props: ListItemProps<"a", { button?: true }>) {
-  return <ListItem button component='a' {...props} />;
+  return <ListItem button component='span' {...props} />;
 }
 
 interface Props {
@@ -38,20 +39,27 @@ interface Props {
 
 export const SearchPeekResults = (props: Props) => {
   const classes = useStyles();
+  const history = useHistory();
+  const handleOnClick = React.useCallback(
+    (name: string) => {
+      history.push(`/person/${name}`);
+    },
+    [history]
+  );
   const { people } = props;
   return (
     <div className={classes.root}>
       <List>
         {people.map((person) => (
-          <>
-            <ListItemLink href={`/person/${person.name}`}>
+          <div onClick={() => handleOnClick(`${person.name}`)}>
+            <ListItemLink>
               <ListItemText
                 primary={person.name}
                 className={classes.listItemText}
               />
             </ListItemLink>
             <Divider />
-          </>
+          </div>
         ))}
       </List>
     </div>

@@ -8,6 +8,7 @@ import { Progress } from "../components/Progress";
 import { Error } from "../components/Error";
 import { SearchBar } from "../components/SearchBar";
 import { SearchPeekResults } from "../components/SearchPeekResults";
+import { withRouter } from "react-router";
 
 const PERSON_QUERY = gql`
   query People($name: String) {
@@ -17,7 +18,7 @@ const PERSON_QUERY = gql`
   }
 `;
 
-export const Search = React.memo(() => {
+const SearchModule = React.memo(() => {
   const { setData } = React.useContext<DataContextProps<PersonProps>>(
     DataContext
   );
@@ -65,4 +66,4 @@ export const Search = React.memo(() => {
   );
 });
 
-export default Search;
+export const Search = SearchModule;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { gql, useQuery } from "@apollo/client";
 
 import { Progress } from "../components/Progress";
@@ -26,7 +26,7 @@ export interface FilmProps {
 export interface PersonDetailsProps {
   name: string;
   height: string;
-  mass: string;
+  mass: number | string;
   gender: string;
   films: FilmProps[];
   vehicles: VehicleProps[];

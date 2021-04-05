@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -7,29 +7,26 @@ import { PersonDetails } from "./modules/PersonDetails";
 import { PaginationController } from "./contexts/PaginationContext";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/DefaultTheme";
-import Navbar from "./components/Navbar";
+import Navbar from "./modules/Navbar";
 import { SearchController } from "./contexts/SearchContext";
-import { DataController } from "./contexts/DataContext";
 
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <SearchController>
-        <DataController>
-          <Navbar />
-          <PaginationController>
-            <Router>
-              <Switch>
-                <Route exact path='/'>
-                  <People />
-                </Route>
-                <Route exact path='/person/:name'>
-                  <PersonDetails />
-                </Route>
-              </Switch>
-            </Router>
-          </PaginationController>
-        </DataController>
+        <PaginationController>
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route exact path='/'>
+                <People />
+              </Route>
+              <Route exact path='/person/:name'>
+                <PersonDetails />
+              </Route>
+            </Switch>
+          </Router>
+        </PaginationController>
       </SearchController>
     </MuiThemeProvider>
   );

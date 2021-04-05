@@ -6,7 +6,6 @@ import envCompatible from "vite-plugin-env-compatible";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh(), reactSvgPlugin(), envCompatible()],
-
   resolve: {
     alias: [
       {
