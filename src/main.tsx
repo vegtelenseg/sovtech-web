@@ -6,45 +6,16 @@ import "slick-carousel/slick/slick-theme.css";
 import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-interface ArgsType {
-  // TODO: Fix type
-  args: Record<string, any> | null;
-}
+// interface ArgsType {
+//   // TODO: Fix type
+//   args: Record<string, any> | null;
+// }
+//@ts-ignore
+const uri = import.meta.env.VITE_SERVER_URI || "http://localhost:4000";
 
-const uri = "http://localhost:4000";
 const client = new ApolloClient({
   uri,
-  cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          people: {
-            keyArgs: false,
-            merge(existing, incoming) {
-              const people = existing ? [...existing.people, ...incoming] : [];
-              return {
-                cursor: incoming.cursor,
-                hasNextPage: false,
-                people,
-              };
-            },
-
-            // @ts-ignore
-            read(existing, { args: { offset, limit } }: ArgsType) {
-              console.log("OFFSET: ", offset);
-              if (existing) {
-                return {
-                  cursor: existing.cursor,
-                  people:
-                    existing && existing.people.slice(offset, offset + limit),
-                };
-              }
-            },
-          },
-        },
-      },
-    },
-  }),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
