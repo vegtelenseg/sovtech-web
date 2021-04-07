@@ -104,7 +104,7 @@ const useStyles = makeStyles(({ palette }) => ({
 interface CardOptions {
   cover: string;
   logo: string;
-  title: React.ReactNode;
+  title: string;
   homeworld: string;
   detailsText: string;
   subtitle: string;
@@ -150,7 +150,9 @@ export const Card = ({
               <div className={styles.team}>{homeworld}</div>
             </Item>
             <Item position={"right"} onClick={onClick}>
-              <div className={styles.button}>{detailsText}</div>
+              <div id={title} className={styles.button}>
+                {detailsText}
+              </div>
             </Item>
           </Row>
         </Box>

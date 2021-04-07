@@ -38,7 +38,7 @@ export const PersonCard = React.memo((props: Props) => {
         height={person.height}
         cover={"  "}
         logo={""}
-        title={<>{person.name}</>}
+        title={person.name}
       />
     </Grid>
   );

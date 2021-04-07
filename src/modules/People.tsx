@@ -68,7 +68,7 @@ export const People = () => {
           {!loading && <Pagination count={100} rowsPerPage={10} />}
           {data && (
             <Box ml={4} mb={3}>
-              <Typography variant='h2' color='primary'>
+              <Typography variant='h2' color='primary' id='allCharacters'>
                 All Characters
               </Typography>
             </Box>
@@ -79,6 +79,7 @@ export const People = () => {
               container
               spacing={4}
               className={classes.container}
+              id='characterList'
             >
               {
                 // @ts-ignore
